@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        inter: "Inter', sans-serif",
+        inter: "'Inter', sans-serif",
         sub: "'Cinzel', serif",
       }
     },
