@@ -1,9 +1,16 @@
+import About from "./About";
+import Banner from "./Banner";
+import Category from "./Category";
+import OurMenu from "./OurMenu";
 
 
 const Home = () => {
     return (
         <div>
-            <h2>This is home page</h2>
+            <Banner />
+            <Category />
+            <About />
+            <OurMenu />
         </div>
     );
 };
