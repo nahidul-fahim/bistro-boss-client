@@ -7,7 +7,6 @@ const OurMenu = () => {
 
     const [menus, setMenus] = useState([]);
 
-    console.log(menus);
 
 
     useEffect(() => {

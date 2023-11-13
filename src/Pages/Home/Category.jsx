@@ -11,7 +11,7 @@ import slide4 from '../../assets/home/slide4.jpg';
 
 const Category = () => {
     return (
-        <>
+        <section className='my-[100px]'>
             <Swiper
                 slidesPerView={4}
                 spaceBetween={20}
@@ -39,7 +39,7 @@ const Category = () => {
                     <h3 className='absolute bottom-8 left-[30%] text-center text-2xl font-sub text-white  font-medium '>Deserts</h3>
                 </SwiperSlide>
             </Swiper>
-        </>
+        </section>
     );
 };
 

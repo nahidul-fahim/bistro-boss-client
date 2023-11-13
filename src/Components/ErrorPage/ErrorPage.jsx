@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
 
 
 const ErrorPage = () => {
     return (
-        <div className="h-[100vh] container mx-auto flex justify-center items-center p-5">
-            <h1 className="text-[200px] text-center font-bold">404</h1>
+        <div className="h-[100vh] flex flex-col justify-center items-center gap-5">
+            <h2 className="text-center text-[200px] font-extrabold font-inter">404</h2>
+            <Link to="/"><button className="font-inter uppercase text-xl px-5 py-2 rounded bg-sub text-white font-semibold tracking-[2px]">BACK TO HOME</button></Link>
         </div>
     );
 };
