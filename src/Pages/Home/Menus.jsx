@@ -3,7 +3,7 @@ import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import MenuItems from "../../Components/MenuItems/MenuItems";
 
 
-const OurMenu = () => {
+const Menus = () => {
 
     const [menus, setMenus] = useState([]);
 
@@ -37,4 +37,4 @@ const OurMenu = () => {
     );
 };
 
-export default OurMenu;
+export default Menus;

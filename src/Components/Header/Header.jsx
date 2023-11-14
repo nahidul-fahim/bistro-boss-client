@@ -43,7 +43,7 @@ const Header = () => {
                     transition: isActive ? "all 1s" : ""
                 }
             }}
-            to="/ourmenu">Our Menu</NavLink>
+            to="/menu">Our Menu</NavLink>
 
         <NavLink className="uppercase font-inter font-semibold text-[16px]"
             style={({ isActive }) => {
