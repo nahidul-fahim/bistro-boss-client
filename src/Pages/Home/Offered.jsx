@@ -1,21 +1,12 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import useMenuCategory from "../../Hooks/useMenuCategory/useMenuCategory";
 
 
 const Offered = () => {
 
-
-    const [offered, setOffered] = useState([]);
-
-    useEffect(() => {
-        fetch('menu.json')
-            .then(res => res.json())
-            .then(data => {
-                const filteredData = data.filter(singleData => singleData.category === 'offered');
-                setOffered(filteredData);
-            })
-    }, [])
+    const [output] = useMenuCategory();
+    const offered = output.filter(singledata => singledata.category === 'offered');
 
     return (
         <section className="container mx-auto my-[90px] flex flex-col justify-center items-center gap-10 p-5">
@@ -25,7 +16,7 @@ const Offered = () => {
             </SectionTitle>
             <div className="grid grid-cols-3 gap-10">
                 {
-                    offered.map(product => <ProductCard
+                    offered.slice(0, 3).map(product => <ProductCard
                         key={product._id}
                         product={product}>
                     </ProductCard>)

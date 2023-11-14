@@ -1,22 +1,12 @@
-import { useEffect, useState } from "react";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
 import MenuItems from "../../Components/MenuItems/MenuItems";
+import useMenuCategory from "../../Hooks/useMenuCategory/useMenuCategory";
 
 
 const Menus = () => {
 
-    const [menus, setMenus] = useState([]);
-
-
-
-    useEffect(() => {
-        fetch('menu.json')
-            .then(res => res.json())
-            .then(data => {
-                const filteredData = data.filter(singleData => singleData.category === 'popular');
-                setMenus(filteredData);
-            })
-    }, [])
+    const [output] = useMenuCategory();
+    const menus = output.filter(singleData => singleData.category === 'popular')
 
 
     return (

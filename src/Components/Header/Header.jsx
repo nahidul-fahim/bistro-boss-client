@@ -53,7 +53,7 @@ const Header = () => {
                     transition: isActive ? "all 1s" : ""
                 }
             }}
-            to="/ourshop">Our Shop</NavLink>
+            to="/allfood">All Food</NavLink>
     </>
 
 
