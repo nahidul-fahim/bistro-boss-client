@@ -22,7 +22,8 @@ const router = createBrowserRouter([
                 element: <OurMenu />
             },
             {
-                path: "/allfood",
+                // path: "/allfood/:category",
+                path: "/allfood/",
                 element: <AllFood />
             },
         ]

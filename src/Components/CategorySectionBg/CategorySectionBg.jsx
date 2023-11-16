@@ -5,7 +5,7 @@ const CategorySectionBg = ({ categoryBgImg, category, description }) => {
 
 
     return (
-        <div className="my-[100px] container mx-auto p-[100px] flex justify-center items-center"
+        <div className="mb-[100px] container mx-auto p-[100px] flex justify-center items-center"
             style={{
                 background: `url(${categoryBgImg})`,
                 backgroundPosition: 'center',

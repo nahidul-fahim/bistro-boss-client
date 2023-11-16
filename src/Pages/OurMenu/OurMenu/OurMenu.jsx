@@ -3,18 +3,23 @@ import PageCover from "../../../Components/PageCover/PageCover";
 import bgImg from '../../../assets/menu/banner3.jpg'
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useMenuCategory from "../../../Hooks/useMenuCategory/useMenuCategory";
-import MenuItems from "../../../Components/MenuItems/MenuItems";
 import desertBg from '../../../assets/menu/dessert-bg.jpeg'
 import CategorySectionBg from "../../../Components/CategorySectionBg/CategorySectionBg";
 import pizzaBg from '../../../assets/menu/pizza-bg.jpg'
+import saladBg from '../../../assets/menu/salad-bg.jpg'
+import soupBg from '../../../assets/menu/soup-bg.jpg'
+import FoodCategory from "../../../Components/FoodCategory/FoodCategory";
+
 
 const OurMenu = () => {
 
     const [output] = useMenuCategory();
 
     const offereed = output.filter(singleProduct => singleProduct.category === 'offered');
-    const desert = output.filter(singleProduct => singleProduct.category === 'dessert');
+    const dessert = output.filter(singleProduct => singleProduct.category === 'dessert');
     const pizza = output.filter(singleProduct => singleProduct.category === 'pizza');
+    const salad = output.filter(singleProduct => singleProduct.category === 'salad');
+    const soup = output.filter(singleProduct => singleProduct.category === 'soup');
 
 
     return (
@@ -29,22 +34,16 @@ const OurMenu = () => {
                 text="Would you like to try a dish?" />
 
             {/* Today offer */}
-
-            <div className="my-[90px] container mx-auto p-5 flex flex-col justify-center items-center gap-12">
+            <div className="mt-[90px] container mx-auto p-5 flex flex-col justify-center items-center gap-12">
                 <SectionTitle
                     subHeading="Don't Miss"
                     mainHeading="TODAY'S OFFER">
                 </SectionTitle>
-                <div className="grid grid-cols-2 gap-10">
-                    {
-                        offereed.map(singleFood => <MenuItems
-                            key={singleFood._id}
-                            item={singleFood}
-                        ></MenuItems>)
-                    }
+                <div>
+                    <FoodCategory items={offereed} category="salad"></FoodCategory>
                 </div>
-                <button className="border-b-2 border-main px-4 py-3 uppercase font-inter font-semibold rounded-lg hover:bg-sub hover:text-white duration-500">Order your favourite food</button>
             </div>
+
 
             {/* Desert food section */}
             <div className="mb-[90px] container mx-auto p-5 flex flex-col justify-center items-center gap-12">
@@ -53,15 +52,9 @@ const OurMenu = () => {
                     category="Deserts"
                     description="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
 
-                <div className="grid grid-cols-2 gap-10">
-                    {
-                        desert.map(singleFood => <MenuItems
-                            key={singleFood._id}
-                            item={singleFood}
-                        ></MenuItems>)
-                    }
+                <div>
+                    <FoodCategory items={dessert} category={"dessert"} />
                 </div>
-                <button className="border-b-2 border-main px-4 py-3 uppercase font-inter font-semibold rounded-lg hover:bg-sub hover:text-white duration-500">Order your favourite food</button>
             </div>
 
             {/* Pizza section */}
@@ -71,15 +64,35 @@ const OurMenu = () => {
                     category="Pizza"
                     description="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
 
-                <div className="grid grid-cols-2 gap-10">
-                    {
-                        pizza.map(singleFood => <MenuItems
-                            key={singleFood._id}
-                            item={singleFood}
-                        ></MenuItems>)
-                    }
+                <div>
+                    <FoodCategory items={pizza} category={"pizza"} />
                 </div>
-                <button className="border-b-2 border-main px-4 py-3 uppercase font-inter font-semibold rounded-lg hover:bg-sub hover:text-white duration-500">Order your favourite food</button>
+            </div>
+
+
+            {/* Salad section */}
+            <div className="mb-[90px] container mx-auto p-5 flex flex-col justify-center items-center gap-12">
+                <CategorySectionBg
+                    categoryBgImg={saladBg}
+                    category="Salad"
+                    description="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
+
+                <div>
+                    <FoodCategory items={salad} category={"salad"} />
+                </div>
+            </div>
+
+
+            {/* soup section */}
+            <div className="mb-[90px] container mx-auto p-5 flex flex-col justify-center items-center gap-12">
+                <CategorySectionBg
+                    categoryBgImg={soupBg}
+                    category="Soup"
+                    description="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
+
+                <div>
+                    <FoodCategory items={soup} category={"soup"} />
+                </div>
             </div>
 
         </div>
