@@ -9,7 +9,7 @@ const Header = () => {
             style={({ isActive }) => {
                 return {
                     color: isActive ? "#EEFF25" : "white",
-                    transform: isActive ? "scale(1.2)" : "scale(1)",
+                    transform: isActive ? "scale(1.1)" : "scale(1)",
                     transition: isActive ? "all 1s" : ""
                 }
             }}
@@ -19,7 +19,7 @@ const Header = () => {
             style={({ isActive }) => {
                 return {
                     color: isActive ? "#EEFF25" : "white",
-                    transform: isActive ? "scale(1.2)" : "scale(1)",
+                    transform: isActive ? "scale(1.1)" : "scale(1)",
                     transition: isActive ? "all 1s" : ""
                 }
             }}
@@ -29,7 +29,7 @@ const Header = () => {
             style={({ isActive }) => {
                 return {
                     color: isActive ? "#EEFF25" : "white",
-                    transform: isActive ? "scale(1.2)" : "scale(1)",
+                    transform: isActive ? "scale(1.1)" : "scale(1)",
                     transition: isActive ? "all 1s" : ""
                 }
             }}
@@ -39,7 +39,7 @@ const Header = () => {
             style={({ isActive }) => {
                 return {
                     color: isActive ? "#EEFF25" : "white",
-                    transform: isActive ? "scale(1.2)" : "scale(1)",
+                    transform: isActive ? "scale(1.1)" : "scale(1)",
                     transition: isActive ? "all 1s" : ""
                 }
             }}
@@ -49,11 +49,21 @@ const Header = () => {
             style={({ isActive }) => {
                 return {
                     color: isActive ? "#EEFF25" : "white",
-                    transform: isActive ? "scale(1.2)" : "scale(1)",
+                    transform: isActive ? "scale(1.1)" : "scale(1)",
                     transition: isActive ? "all 1s" : ""
                 }
             }}
-            to="/allfood">All Food</NavLink>
+            to="/allfood/salad">All Food</NavLink>
+
+        <NavLink className="uppercase font-inter font-semibold text-[16px]"
+            style={({ isActive }) => {
+                return {
+                    color: isActive ? "#EEFF25" : "white",
+                    transform: isActive ? "scale(1.1)" : "scale(1)",
+                    transition: isActive ? "all 1s" : ""
+                }
+            }}
+            to="/login">Login</NavLink>
     </>
 
 

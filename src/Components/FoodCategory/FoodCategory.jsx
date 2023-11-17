@@ -13,7 +13,7 @@ const FoodCategory = ({ items, category }) => {
                     ></MenuItems>)
                 }
             </div>
-            <Link to={`allfood/${category}`}> <button className="border-b-2 border-main px-4 py-3 uppercase font-inter font-semibold rounded-lg hover:bg-sub hover:text-white duration-500">Order your favourite food</button></Link>
+            <Link to={`/allfood/${category}`}> <button className="border-b-2 border-main px-4 py-3 uppercase font-inter font-semibold rounded-lg hover:bg-sub hover:text-white duration-500">Order your favourite food</button></Link>
         </div>
     );
 };

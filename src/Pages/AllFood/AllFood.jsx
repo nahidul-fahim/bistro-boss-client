@@ -6,11 +6,15 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useState } from "react";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import { useParams } from "react-router-dom";
 
 const AllFood = () => {
 
+    const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks'];
+    const { category } = useParams();
+    const initialCategory = categories.indexOf(category);
     const [output] = useMenuCategory();
-    const [tabIndex, setTabIndex] = useState(0);
+    const [tabIndex, setTabIndex] = useState(initialCategory);
     const salad = output.filter(singleItem => singleItem.category === 'salad');
     const pizza = output.filter(singleItem => singleItem.category === 'pizza');
     const soup = output.filter(singleItem => singleItem.category === 'soup');
@@ -18,12 +22,11 @@ const AllFood = () => {
     const drinks = output.filter(singleItem => singleItem.category === 'drinks');
 
 
-
     return (
         <div>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>All Foods Page</title>
+                <title>Food Page</title>
             </Helmet>
             <PageCover
                 bgImg={pageBg}
