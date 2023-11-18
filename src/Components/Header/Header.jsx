@@ -64,6 +64,16 @@ const Header = () => {
                 }
             }}
             to="/login">Login</NavLink>
+
+        <NavLink className="uppercase font-inter font-semibold text-[16px]"
+            style={({ isActive }) => {
+                return {
+                    color: isActive ? "#EEFF25" : "white",
+                    transform: isActive ? "scale(1.1)" : "scale(1)",
+                    transition: isActive ? "all 1s" : ""
+                }
+            }}
+            to="/signup">Sign Up</NavLink>
     </>
 
 

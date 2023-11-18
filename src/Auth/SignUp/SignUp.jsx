@@ -1,42 +1,19 @@
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { Helmet } from "react-helmet";
 import loginBg from '../../assets/others/authentication.png'
 import loginImg from '../../assets/others/authentication2.png'
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from 'react';
 
 
-const Login = () => {
+const SignUp = () => {
 
-    const [disabled, setDisabled] = useState(true);
-    const captchaRef = useRef(null);
-
-
-    useEffect(() => {
-        loadCaptchaEnginge(6);
-    }, [])
-
-    // Captcha validation
-    const handleCaptchaValidate = () => {
-        const user_captcha_value = captchaRef.current.value;
-        console.log(user_captcha_value);
-        if (validateCaptcha(user_captcha_value) === true) {
-            setDisabled(false)
-        }
-        else {
-            setDisabled(true)
-        }
-    }
-
-    // Login functionality
-    const handleLogin = e => {
+    const handleSignUp = e => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        const logInInfo = { email, password };
-        console.log(logInInfo);
+        const signUpInfo = { email, password };
+        console.log(signUpInfo);
 
 
     }
@@ -60,18 +37,14 @@ const Login = () => {
 
             {/* main content */}
             <div className="container mx-auto p-5 flex justify-center items-center gap-10 h-[75%] w-[80%] shadow-[0_0_40px_#7371755B] py-8">
-                {/* Left side */}
-                <div className="w-1/2">
-                    <img src={loginImg} alt="Login page image" />
-                </div>
 
-                {/* right side */}
+                {/* Left side */}
                 <div className="w-1/2 flex flex-col justify-center items-center gap-10">
-                    <h2 className="font-inter text-3xl text-black text-center font-bold">Login</h2>
+                    <h2 className="font-inter text-3xl text-black text-center font-bold">Sign Up</h2>
 
                     {/* Login form */}
                     <div className="w-full flex flex-col justify-center items-center gap-5">
-                        <form onSubmit={handleLogin} className="w-full flex flex-col justify-center items-center gap-5">
+                        <form onSubmit={handleSignUp} className="w-full flex flex-col justify-center items-center gap-5">
 
                             {/* email input */}
                             <div className="w-2/3 flex flex-col justify-center items-start gap-2">
@@ -89,24 +62,23 @@ const Login = () => {
                                 <input type="password" name="password" id="password" placeholder="Enter password" className="w-full focus:outline-none font-inter px-4 py-3 border-[1px] border-[#d4d4d4] rounded-md" />
                             </div>
 
-                            {/* Captcha input and authentication */}
-                            <div className="w-2/3 flex flex-col justify-center items-start gap-2">
-                                <LoadCanvasTemplate />
-                                <input ref={captchaRef} type="text" name="captcha" id="captcha" placeholder="Enter the above text here" className="w-full focus:outline-none font-inter px-4 py-3 border-[1px] border-[#d4d4d4] rounded-md" />
-                                <button onClick={handleCaptchaValidate} className='text-[14px] border-[1px] border-[lightgray] hover:border-sub duration-300 px-3 py-1 font-inter text-[gray]'>Validate Captcha</button>
-                            </div>
-
                             {/* Submit button */}
-                            <input disabled={disabled} type="submit" value="Login" className="bg-sub px-5 py-2 rounded w-2/3 font-semibold uppercase text-white hover:bg-white hover:text-sub duration-500 cursor-pointer disabled:bg-[gray] disabled:text-[lightgray] disabled:cursor-not-allowed" />
+                            <input type="submit" value="Sign Up" className="bg-sub px-5 py-2 rounded w-2/3 font-semibold uppercase text-white hover:bg-white hover:text-sub duration-500 cursor-pointer" />
                         </form>
 
-                        {/* Toggle to signup page */}
-                        <p className="font-medium text-black font-inter">New here? <span><Link to="/signup" className="font-semibold text-sub hover:text-black duration-500">Sign up here</Link></span></p>
+                        {/* Toggle to login page */}
+                        <p className="font-medium text-black font-inter">Already have an account? <span><Link to="/login" className="font-semibold text-sub hover:text-black duration-500">Log in here</Link></span></p>
                     </div>
                 </div>
+
+                {/* Right side */}
+                <div className="w-1/2">
+                    <img src={loginImg} alt="Login page image" />
+                </div>
+
             </div>
         </div>
     );
 };
 
-export default Login;
+export default SignUp;
