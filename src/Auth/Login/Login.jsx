@@ -19,7 +19,6 @@ const Login = () => {
     // Captcha validation
     const handleCaptchaValidate = () => {
         const user_captcha_value = captchaRef.current.value;
-        console.log(user_captcha_value);
         if (validateCaptcha(user_captcha_value) === true) {
             setDisabled(false)
         }
@@ -93,7 +92,7 @@ const Login = () => {
                             <div className="w-2/3 flex flex-col justify-center items-start gap-2">
                                 <LoadCanvasTemplate />
                                 <input ref={captchaRef} type="text" name="captcha" id="captcha" placeholder="Enter the above text here" className="w-full focus:outline-none font-inter px-4 py-3 border-[1px] border-[#d4d4d4] rounded-md" />
-                                <button onClick={handleCaptchaValidate} className='text-[14px] border-[1px] border-[lightgray] hover:border-sub duration-300 px-3 py-1 font-inter text-[gray]'>Validate Captcha</button>
+                                <button onClick={handleCaptchaValidate} className='text-[14px] border-[1px] border-[lightgray] hover:border-sub duration-300 px-3 py-1 font-inter text-[gray] rounded'>Validate Captcha</button>
                             </div>
 
                             {/* Submit button */}
