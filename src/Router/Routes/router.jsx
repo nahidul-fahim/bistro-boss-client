@@ -6,6 +6,8 @@ import OurMenu from "../../Pages/OurMenu/OurMenu/OurMenu";
 import AllFood from "../../Pages/AllFood/AllFood";
 import Login from "../../Auth/Login/Login";
 import SignUp from "../../Auth/SignUp/SignUp";
+import Contact from "../../Pages/Contact/Contact";
+import PrivateRouter from "../PrivateRouter/PrivateRouter";
 
 
 
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
                 path: "/allfood/:category",
                 element: <AllFood />
             },
+            {
+                path: "/contact",
+                element: <PrivateRouter><Contact /></PrivateRouter>
+            }
         ]
     },
     {

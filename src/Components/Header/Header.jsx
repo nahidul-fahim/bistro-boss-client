@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
+import useAuthProvider from "../../Hooks/useAuthProvider/useAuthProvider";
 
 
 const Header = () => {
+
+    const { currentUser, LogOut } = useAuthProvider();
 
 
     const links = <>
@@ -55,25 +58,39 @@ const Header = () => {
             }}
             to="/allfood/salad">All Food</NavLink>
 
-        <NavLink className="uppercase font-inter font-semibold text-[16px]"
-            style={({ isActive }) => {
-                return {
-                    color: isActive ? "#EEFF25" : "white",
-                    transform: isActive ? "scale(1.1)" : "scale(1)",
-                    transition: isActive ? "all 1s" : ""
-                }
-            }}
-            to="/login">Login</NavLink>
+        {
+            currentUser === null ?
+                <div className="flex justify-center items-center gap-5">
+                    <NavLink className="uppercase font-inter font-semibold text-[16px]"
+                        style={({ isActive }) => {
+                            return {
+                                color: isActive ? "#EEFF25" : "white",
+                                transform: isActive ? "scale(1.1)" : "scale(1)",
+                                transition: isActive ? "all 1s" : ""
+                            }
+                        }}
+                        to="/login">Login</NavLink>
 
-        <NavLink className="uppercase font-inter font-semibold text-[16px]"
-            style={({ isActive }) => {
-                return {
-                    color: isActive ? "#EEFF25" : "white",
-                    transform: isActive ? "scale(1.1)" : "scale(1)",
-                    transition: isActive ? "all 1s" : ""
-                }
-            }}
-            to="/signup">Sign Up</NavLink>
+                    <NavLink className="uppercase font-inter font-semibold text-[16px]"
+                        style={({ isActive }) => {
+                            return {
+                                color: isActive ? "#EEFF25" : "white",
+                                transform: isActive ? "scale(1.1)" : "scale(1)",
+                                transition: isActive ? "all 1s" : ""
+                            }
+                        }}
+                        to="/signup">Sign Up</NavLink>
+                </div>
+                :
+                <div>
+                    <button onClick={() => LogOut()} className="uppercase text-white font-inter font-semibold text-[16px]">Log Out</button>
+                </div>
+
+        }
+
+        :
+
+
     </>
 
 
@@ -81,9 +98,9 @@ const Header = () => {
 
     return (
         <div className="w-full fixed top-0 right-0 z-10 bg-[#00000048] px-5 py-2"
-        style={{
-            backdropFilter: 'blur(8px)'
-        }}>
+            style={{
+                backdropFilter: 'blur(8px)'
+            }}>
             <div className="z-10 w-full flex justify-center items-center gap-5 navbar">
 
                 {/* Left side */}
@@ -102,7 +119,7 @@ const Header = () => {
                 {/* right side */}
                 <div className="w-[50%] lg:w-[70%] flex justify-end items-center">
                     <div className="hidden lg:flex">
-                        <ul className="menu menu-horizontal px-1 gap-12">
+                        <ul className="menu menu-horizontal px-1 gap-5">
                             {links}
                         </ul>
                     </div>

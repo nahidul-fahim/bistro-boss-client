@@ -2,14 +2,19 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { Helmet } from "react-helmet";
 import loginBg from '../../assets/others/authentication.png'
 import loginImg from '../../assets/others/authentication2.png'
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from 'react';
+import useAuthProvider from '../../Hooks/useAuthProvider/useAuthProvider';
 
 
 const Login = () => {
 
     const [disabled, setDisabled] = useState(true);
     const captchaRef = useRef(null);
+    const { LogInUser } = useAuthProvider();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const loginRef = useRef(null);
 
 
     useEffect(() => {
@@ -36,8 +41,16 @@ const Login = () => {
 
         const logInInfo = { email, password };
         console.log(logInInfo);
-
-
+        LogInUser(email, password)
+            .then(res => {
+                const user = res.user;
+                console.log(user);
+                loginRef.current.reset();
+                navigate(location?.state ? location?.state : "/")
+            })
+            .catch(error => {
+                console.log(error.code);
+            })
     }
 
 
@@ -70,7 +83,7 @@ const Login = () => {
 
                     {/* Login form */}
                     <div className="w-full flex flex-col justify-center items-center gap-5">
-                        <form onSubmit={handleLogin} className="w-full flex flex-col justify-center items-center gap-5">
+                        <form ref={loginRef} onSubmit={handleLogin} className="w-full flex flex-col justify-center items-center gap-5">
 
                             {/* email input */}
                             <div className="w-2/3 flex flex-col justify-center items-start gap-2">
@@ -91,8 +104,7 @@ const Login = () => {
                             {/* Captcha input and authentication */}
                             <div className="w-2/3 flex flex-col justify-center items-start gap-2">
                                 <LoadCanvasTemplate />
-                                <input ref={captchaRef} type="text" name="captcha" id="captcha" placeholder="Enter the above text here" className="w-full focus:outline-none font-inter px-4 py-3 border-[1px] border-[#d4d4d4] rounded-md" />
-                                <button onClick={handleCaptchaValidate} className='text-[14px] border-[1px] border-[lightgray] hover:border-sub duration-300 px-3 py-1 font-inter text-[gray] rounded'>Validate Captcha</button>
+                                <input onBlur={handleCaptchaValidate} ref={captchaRef} type="text" name="captcha" id="captcha" placeholder="Enter the above text here" className="w-full focus:outline-none font-inter px-4 py-3 border-[1px] border-[#d4d4d4] rounded-md" />
                             </div>
 
                             {/* Submit button */}
