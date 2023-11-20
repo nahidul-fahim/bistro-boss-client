@@ -1,10 +1,13 @@
 import { NavLink } from "react-router-dom";
 import useAuthProvider from "../../Hooks/useAuthProvider/useAuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
 
 
 const Header = () => {
 
     const { currentUser, LogOut } = useAuthProvider();
+
+    console.log(currentUser?.photoURL);
 
 
     const links = <>
@@ -82,15 +85,16 @@ const Header = () => {
                         to="/signup">Sign Up</NavLink>
                 </div>
                 :
-                <div>
+                <div className="flex justify-end items-center gap-5">
                     <button onClick={() => LogOut()} className="uppercase text-white font-inter font-semibold text-[16px]">Log Out</button>
+                    <img src={currentUser?.photoURL} alt="" className="w-[50px] h-[50px]" />
+                    <div className="flex justify-end items-center gap-1">
+                        <FaShoppingCart className="text-2xl text-white"/>
+                        <div className="badge badge-secondary">0</div>
+                    </div>
                 </div>
 
         }
-
-        :
-
-
     </>
 
 
@@ -119,7 +123,7 @@ const Header = () => {
                 {/* right side */}
                 <div className="w-[50%] lg:w-[70%] flex justify-end items-center">
                     <div className="hidden lg:flex">
-                        <ul className="menu menu-horizontal px-1 gap-5">
+                        <ul className="menu menu-horizontal px-1 gap-5 flex justify-end items-center">
                             {links}
                         </ul>
                     </div>
