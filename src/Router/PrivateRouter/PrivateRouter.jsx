@@ -2,7 +2,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import useAuthProvider from "../../Hooks/useAuthProvider/useAuthProvider";
 
 
-const PrivateRouter = ({children}) => {
+const PrivateRouter = ({ children }) => {
 
     const { currentUser, loading } = useAuthProvider();
 
@@ -14,12 +14,12 @@ const PrivateRouter = ({children}) => {
         </div>
     }
 
-    if (currentUser){
+    if (currentUser) {
         return children;
     }
 
 
-    return <Navigate state={location.pathname} to="/login" />
+    return <Navigate state={{ from: location }} to="/login" />
 };
 
 export default PrivateRouter;

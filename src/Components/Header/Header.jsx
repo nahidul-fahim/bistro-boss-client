@@ -6,9 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 const Header = () => {
 
     const { currentUser, LogOut } = useAuthProvider();
-
-    console.log(currentUser?.photoURL);
-
+    
 
     const links = <>
         <NavLink className="uppercase font-inter font-semibold text-[16px]"

@@ -16,6 +16,8 @@ const Login = () => {
     const navigate = useNavigate();
     const loginRef = useRef(null);
 
+    const from = location.state?.from?.pathname || "/";
+
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -46,7 +48,7 @@ const Login = () => {
                 const user = res.user;
                 console.log(user);
                 loginRef.current.reset();
-                navigate(location?.state ? location?.state : "/")
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.log(error.code);

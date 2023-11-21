@@ -1,11 +1,72 @@
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuthProvider from "../../Hooks/useAuthProvider/useAuthProvider";
+import Swal from 'sweetalert2'
+import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
+
 
 
 const ProductCard = ({ product }) => {
 
-    const { name, recipe, image, price } = product;
+    const { name, recipe, image, price, _id } = product;
+    const { currentUser } = useAuthProvider();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const axiosSecure = useAxiosSecure();
 
     const handleAddToCart = product => {
         console.log(product);
+        if (currentUser && currentUser.email) {
+            const cartItem = {
+                foodId: _id,
+                email: currentUser.email,
+                name: name,
+                recipe: recipe,
+                image: image,
+                price: price
+            }
+            axiosSecure.post('/cart', cartItem)
+                .then(res => {
+                    console.log(res.data);
+                    Swal.fire({
+                        position: "bottom-end",
+                        icon: "success",
+                        title: "Product added to the cart",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                })
+                .catch(error => {
+                    console.log(error.code, error.message);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: `${error.code}`,
+                    });
+                })
+
+
+        }
+        else {
+            Swal.fire({
+                title: "You are not logged in.",
+                text: "Please login first!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Login"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } })
+                }
+            });
+        }
+
+
+
+
+
+
     }
 
     return (
