@@ -1,4 +1,5 @@
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
 import useCart from "../../../Hooks/useCart/useCart";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import Swal from 'sweetalert2'
@@ -7,8 +8,10 @@ import Swal from 'sweetalert2'
 const Cart = () => {
 
 
-    const [cart] = useCart();
-    const totalPrice = cart.reduce((total, item) => total + item.price, 0)
+    const [cart, refetch] = useCart();
+    const total = cart.reduce((total, item) => total + item.price, 0);
+    const totalPrice = total.toFixed(2);
+    const axiosSecure = useAxiosSecure();
 
 
     const handleDelete = id => {
@@ -24,22 +27,24 @@ const Cart = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
+                axiosSecure.delete(`/cart/${id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your product has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+                    .catch(err => console.log(err.code))
             }
         });
 
 
-
     }
-
-
-
-
-
 
 
 
