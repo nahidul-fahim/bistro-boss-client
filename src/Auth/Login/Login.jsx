@@ -5,16 +5,20 @@ import loginImg from '../../assets/others/authentication2.png'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from 'react';
 import useAuthProvider from '../../Hooks/useAuthProvider/useAuthProvider';
+import { FaGoogle } from 'react-icons/fa';
+import useAxiosOpen from '../../Hooks/useAxiosOpen/useAxiosOpen';
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
 
     const [disabled, setDisabled] = useState(true);
     const captchaRef = useRef(null);
-    const { LogInUser } = useAuthProvider();
+    const { LogInUser, GoogleSignIn } = useAuthProvider();
     const location = useLocation();
     const navigate = useNavigate();
     const loginRef = useRef(null);
+    const axiosOpen = useAxiosOpen();
 
     const from = location.state?.from?.pathname || "/";
 
@@ -32,17 +36,46 @@ const Login = () => {
         else {
             setDisabled(true)
         }
+    };
+
+    // Google sign in
+    const handleGoogleSignIn = () => {
+        GoogleSignIn()
+            .then(res => {
+                const userInfo = {
+                    name: res.user?.displayName,
+                    email: res.user?.email
+                };
+                // Save the user info the database
+                axiosOpen.post("/user", userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        // Show success message if the new user is created and added to the database
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                position: "bottom-end",
+                                icon: "success",
+                                title: "New User Created Successfully!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                        // send to the homepage after sign in using google
+                        navigate("/");
+                    })
+                    .catch(err => console.log(err.code, "||", err.message))
+            })
+            .catch(err => console.log(err.code, "||", err.message))
     }
 
-    // Login functionality
+    // Login using email-password
     const handleLogin = e => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        const logInInfo = { email, password };
-        console.log(logInInfo);
+        // const logInInfo = { email, password };
         LogInUser(email, password)
             .then(res => {
                 const user = res.user;
@@ -115,6 +148,9 @@ const Login = () => {
 
                         {/* Toggle to signup page */}
                         <p className="font-medium text-black font-inter">New here? <span><Link to="/signup" className="font-semibold text-sub hover:text-black duration-500">Sign up here</Link></span></p>
+                        <p className='font-regular text-black font-inter'>Or log in with</p>
+                        <button onClick={handleGoogleSignIn}
+                            className='border-2 rounded-[50%] p-3 hover:bg-sub hover:text-white duration-300 hover:border-sub'><FaGoogle /></button>
                     </div>
                 </div>
             </div>

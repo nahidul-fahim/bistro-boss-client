@@ -9,8 +9,6 @@ const Header = () => {
     const { currentUser, LogOut } = useAuthProvider();
     const [cart] = useCart();
 
-    console.log(cart);
-
     const links = <>
         <NavLink className="uppercase font-inter font-semibold text-[16px]"
             style={({ isActive }) => {

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuthProvider from "../../Hooks/useAuthProvider/useAuthProvider";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
 import useCart from "../../Hooks/useCart/useCart";
 
