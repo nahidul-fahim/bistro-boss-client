@@ -12,7 +12,7 @@ const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
 
     // using tanstack query to get data from mongo db
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
@@ -21,8 +21,64 @@ const AllUsers = () => {
     })
 
     // deleting functionality for users from db
-    const handleDelete = user => {
-        
+    const handleDelete = id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    axiosSecure.delete(`/users/${id}`)
+                        .then(res => {
+                            console.log(res.data);
+                            if (res.data.deletedCount > 0) {
+                                refetch();
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Your product has been deleted.",
+                                    icon: "success"
+                                });
+                            }
+                        })
+                        .catch(err => console.log(err.code))
+                }
+            });
+    };
+
+
+    // Update user role
+    const handleUserRole = id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to make the user an admin?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, assign admin!"
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    axiosSecure.patch(`/user/admin/${id}`)
+                        .then(res => {
+                            console.log(res.data);
+                            if (res.data.modifiedCount > 0) {
+                                refetch();
+                                Swal.fire({
+                                    title: "New Admin Assigned!",
+                                    text: "You have assigned a new admin.",
+                                    icon: "success"
+                                });
+                            }
+                        })
+                        .catch(err => console.log(err.code))
+                }
+            });
     }
 
 
@@ -67,11 +123,11 @@ const AllUsers = () => {
                                         <h4 className="font-medium font-inter text-[14px]">{user.email}</h4>
                                     </td>
                                     <td className="font-inter font-semibold text-[14px]">
-                                        <button
+                                        <button onClick={() => handleUserRole(user._id)}
                                             className="text-xl bg-sub text-white px-2 py-2 rounded-md"><FaUsers /> </button>
                                     </td>
                                     <th>
-                                        <button onClick={() => handleDelete(user)}
+                                        <button onClick={() => handleDelete(user._id)}
                                             className="text-xl bg-[#b12121] text-white px-2 py-2 rounded-md"><RiDeleteBin5Line /> </button>
                                     </th>
                                 </tr>)
