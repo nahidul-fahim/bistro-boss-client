@@ -10,6 +10,7 @@ import Contact from "../../Pages/Contact/Contact";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
 import Dashboard from "../../Layout/Dashboard/Dashboard";
 import Cart from "../../Pages/Dashboard/Cart/Cart";
+import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 
 
 
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
         element: <SignUp />
     },
 
-    // User dashbooard router
+    // Dashbooard routers
     {
         path: "dashboard",
         // path: "/dashboard",
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
                 path: "cart",
                 // path: "/cart",
                 element: <Cart />
+            },
+            {
+                path:"allusers",
+                element: <AllUsers />
             },
         ]
     }

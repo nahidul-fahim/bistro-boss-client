@@ -1,11 +1,79 @@
-import { FaBars, FaCalendar, FaCalendarDay, FaCartPlus, FaHome, FaShoppingBag, FaStar, FaWallet } from "react-icons/fa";
+import { FaBars, FaBook, FaCalendar, FaCalendarDay, FaCartPlus, FaHome, FaList, FaShoppingBag, FaStar, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 
 const Dashboard = () => {
 
-    const SidebarLinks = <>
 
+    const isAdmin = true;
+
+
+
+    // admin dashboard links
+    const AdminDashBoardLinks = <>
+        <NavLink className="uppercase font-sub font-medium text-[16px] flex justify-start items-center gap-4"
+            style={({ isActive }) => {
+                return {
+                    color: isActive ? "white" : "black",
+                    transition: isActive ? "all .3s" : ""
+                }
+            }}
+            to="/dashboard/">
+            <FaHome className="text-2xl" />
+            Admin Home
+        </NavLink>
+
+        <NavLink className="uppercase font-sub font-medium text-[16px] flex justify-start items-center gap-4"
+            style={({ isActive }) => {
+                return {
+                    color: isActive ? "white" : "black",
+                    transition: isActive ? "all .3s" : ""
+                }
+            }}
+            to="/dashboard/additem">
+            <FaUtensils className="text-2xl" />
+            Add Items
+        </NavLink>
+
+        <NavLink className="uppercase font-sub font-medium text-[16px] flex justify-start items-center gap-4"
+            style={({ isActive }) => {
+                return {
+                    color: isActive ? "white" : "black",
+                    transition: isActive ? "all .3s" : ""
+                }
+            }}
+            to="/dashboard/manageitem">
+            <FaList className="text-2xl" />
+            Manage Items
+        </NavLink>
+
+        <NavLink className="uppercase font-sub font-medium text-[16px] flex justify-start items-center gap-4"
+            style={({ isActive }) => {
+                return {
+                    color: isActive ? "white" : "black",
+                    transition: isActive ? "all .3s" : ""
+                }
+            }}
+            to="/dashboard/managebookings">
+            <FaBook className="text-2xl" />
+            Manage Bookings
+        </NavLink>
+
+        <NavLink className="uppercase font-sub font-medium text-[16px] flex justify-start items-center gap-4"
+            style={({ isActive }) => {
+                return {
+                    color: isActive ? "white" : "black",
+                    transition: isActive ? "all .3s" : ""
+                }
+            }}
+            to="/dashboard/allusers">
+            <FaUsers className="text-2xl" />
+            All Users
+        </NavLink>
+    </>
+
+    // user dasboard routes (links)
+    const UserDashBoardLinks = <>
         <NavLink className="uppercase font-sub font-medium text-[16px] flex justify-start items-center gap-4"
             style={({ isActive }) => {
                 return {
@@ -17,7 +85,6 @@ const Dashboard = () => {
             <FaHome className="text-2xl" />
             User Home
         </NavLink>
-
 
         <NavLink className="uppercase font-sub font-medium text-[16px] flex justify-start items-center gap-4"
             style={({ isActive }) => {
@@ -94,7 +161,21 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 min-h-full flex flex-col justify-start items-start gap-7">
                     {/* Sidebar content here */}
-                    {SidebarLinks}
+
+
+                    {/* Validating user or admin, then showing router links respectively */}
+                    {
+                        isAdmin ?
+                            <>
+                                {AdminDashBoardLinks}
+                            </>
+                            :
+                            <>
+                                {UserDashBoardLinks}
+                            </>
+                    }
+
+
                     <div className="divider"></div>
                     <Link to="/" className="uppercase font-sub font-medium text-[16px] flex justify-start items-center gap-4">
                         <FaHome className="text-2xl" />
