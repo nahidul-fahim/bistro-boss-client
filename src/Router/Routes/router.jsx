@@ -8,10 +8,13 @@ import Login from "../../Auth/Login/Login";
 import SignUp from "../../Auth/SignUp/SignUp";
 import Contact from "../../Pages/Contact/Contact";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
+import Dashboard from "../../Layout/Dashboard/Dashboard";
+import Cart from "../../Pages/Dashboard/Cart/Cart";
 
 
 
 const router = createBrowserRouter([
+    // normal user's view router
     {
         path: "/",
         element: <Root />,
@@ -35,13 +38,30 @@ const router = createBrowserRouter([
             }
         ]
     },
+    // user login
     {
         path: "/login",
         element: <Login />
     },
+
+    // user signup
     {
         path: "/signup",
         element: <SignUp />
+    },
+
+    // User dashbooard router
+    {
+        path: "dashboard",
+        // path: "/dashboard",
+        element: <Dashboard />,
+        children: [
+            {
+                path: "cart",
+                // path: "/cart",
+                element: <Cart />
+            },
+        ]
     }
 ])
 

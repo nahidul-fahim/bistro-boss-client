@@ -4,7 +4,7 @@ import CallUs from "./CallUs";
 import Category from "./Category";
 import Offered from "./Offered";
 import Menus from "./Menus";
-import Testimonial from "./Testimonial";
+// import Testimonial from "./Testimonial";
 import { Helmet } from "react-helmet";
 
 
@@ -21,7 +21,7 @@ const Home = () => {
             <Menus />
             <CallUs />
             <Offered />
-            <Testimonial />
+            {/* <Testimonial /> */}
         </div>
     );
 };
