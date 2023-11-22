@@ -41,10 +41,7 @@ const Cart = () => {
                     .catch(err => console.log(err.code))
             }
         });
-
-
     }
-
 
 
 
