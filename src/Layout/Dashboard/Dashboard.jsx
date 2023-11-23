@@ -1,11 +1,13 @@
 import { FaBars, FaBook, FaCalendar, FaCalendarDay, FaCartPlus, FaHome, FaList, FaShoppingBag, FaStar, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../../Hooks/useAdmin/useAdmin";
 
 
 const Dashboard = () => {
 
 
-    const isAdmin = true;
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
 
 

@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
             if (user) {
                 // get token and store in the client side
                 const userInfo = { email: user.email };
-                console.log(userInfo);
+                // console.log(userInfo);
                 axiosOpen.post("/jwt", userInfo)
                     .then(res => {
                         if (res.data.token) {
@@ -71,7 +71,7 @@ const AuthProvider = ({ children }) => {
                 // TODO: Remove token
                 localStorage.removeItem('access-token')
             }
-            console.log("Current user getting from AuthProvider:", user);
+            // console.log("Current user getting from AuthProvider:", user);
         });
         return () => unsubscribe();
     }, [axiosOpen])
