@@ -123,8 +123,13 @@ const AllUsers = () => {
                                         <h4 className="font-medium font-inter text-[14px]">{user.email}</h4>
                                     </td>
                                     <td className="font-inter font-semibold text-[14px]">
-                                        <button onClick={() => handleUserRole(user._id)}
-                                            className="text-xl bg-sub text-white px-2 py-2 rounded-md"><FaUsers /> </button>
+                                        {
+                                            user.role === 'admin' ?
+                                                <p className="font-semibold text-left font-inter text-[14px]">Admin</p>
+                                                :
+                                                <button onClick={() => handleUserRole(user._id)}
+                                                    className="text-xl bg-sub text-white px-2 py-2 rounded-md"><FaUsers /> </button>
+                                        }
                                     </td>
                                     <th>
                                         <button onClick={() => handleDelete(user._id)}
