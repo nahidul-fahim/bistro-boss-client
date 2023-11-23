@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import useAuthProvider from "../useAuthProvider/useAuthProvider";
 
 
 const axiosSecure = axios.create({
@@ -7,6 +9,9 @@ const axiosSecure = axios.create({
 })
 
 const useAxiosSecure = () => {
+
+    const navigate = useNavigate();
+    const { LogOut } = useAuthProvider();
 
     // request interceptor to add authorization header
     axiosSecure.interceptors.request.use(function (config) {
@@ -21,18 +26,18 @@ const useAxiosSecure = () => {
 
 
     // intercepts 401 and 403 status
-    axios.interceptors.response.use(function (response) {
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
+    axiosSecure.interceptors.response.use(function (response) {
         return response;
-    },
-    function (error) {
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        // Do something with response error
+    }, async (error) => {
         const status = error.response.status;
-        console.log("error in response", status);
+        console.log(error);
+
+        if (status === 401 || status === 403) {
+            await LogOut();
+            navigate('/login');
+        }
         return Promise.reject(error);
-    });
+    })
 
 
 
