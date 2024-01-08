@@ -8,6 +8,8 @@ const Menus = () => {
     const [output] = useMenuCategory();
     const menus = output.filter(singleData => singleData.category === 'popular')
 
+    console.log(menus);
+
 
     return (
         <section className="container mx-auto my-[90px] flex flex-col justify-center items-center gap-10 p-5">

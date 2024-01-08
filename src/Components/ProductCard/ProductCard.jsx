@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
             axiosSecure.post('/cart', cartItem)
                 .then(res => {
                     console.log(res.data);
-                    if (res.data.insertedId) {
+                    if (res.data) {
                         // refetch the data in tanstack query hook to count the cart item automatically
                         refetch();
                         Swal.fire({
@@ -67,12 +67,6 @@ const ProductCard = ({ product }) => {
                 }
             });
         }
-
-
-
-
-
-
     }
 
     return (

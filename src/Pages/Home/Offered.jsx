@@ -8,6 +8,8 @@ const Offered = () => {
     const [output] = useMenuCategory();
     const offered = output.filter(singledata => singledata.category === 'offered');
 
+    console.log(offered)
+
     return (
         <section className="container mx-auto my-[90px] flex flex-col justify-center items-center gap-10 p-5">
             <SectionTitle
