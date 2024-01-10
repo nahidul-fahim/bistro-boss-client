@@ -59,10 +59,10 @@ const AuthProvider = ({ children }) => {
             if (user) {
                 // get token and store in the client side
                 const userInfo = { email: user.email };
-                // console.log(userInfo);
                 axiosOpen.post("/jwt", userInfo)
                     .then(res => {
                         if (res.data.token) {
+                            console.log("setting token:" + " " + res.data.token)
                             localStorage.setItem('access-token', res.data.token);
                         }
                     })
@@ -78,7 +78,7 @@ const AuthProvider = ({ children }) => {
 
 
 
-    // send context value to the childrens
+    // send context value to the children
     const authInfo = { currentUser, loading, createNewUser, LogInUser, LogOut, updateUserProfile, GoogleSignIn };
 
     return (
