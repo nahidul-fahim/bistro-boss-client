@@ -26,7 +26,8 @@ const Cart = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/cart/${id}`)
+                console.log("agree to delete" + " " + id)
+                axiosSecure.delete(`/deletecartitem/${id}`)
                     .then(res => {
                         console.log(res.data);
                         if (res.data.deletedCount > 0) {
@@ -37,13 +38,18 @@ const Cart = () => {
                                 icon: "success"
                             });
                         }
+                        else {
+                            Swal.fire({
+                                title: "Couldn't delete!",
+                                text: "Your product couldn't be deleted.",
+                                icon: "error"
+                            });
+                        }
                     })
                     .catch(err => console.log(err.code))
             }
         });
     }
-
-
 
     return (
         <div className="w-full flex justify-start items-center gap-5 flex-col min-h-[100vh]">

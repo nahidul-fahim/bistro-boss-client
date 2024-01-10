@@ -61,7 +61,7 @@ const Login = () => {
                             });
                         }
                         // send to the homepage after sign in using google
-                        navigate("/");
+                        navigate("/")
                     })
                     .catch(err => console.log(err.code, "||", err.message))
             })
